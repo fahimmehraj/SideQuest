@@ -6,6 +6,7 @@
 import { Text as DefaultText, useColorScheme, View as DefaultView, SafeAreaView as DefaultSafeAreaView, View } from 'react-native';
 
 import Colors from '../constants/Colors';
+import React from 'react';
 
 export function useThemeColor(
   props: { light?: string; dark?: string },
@@ -49,3 +50,5 @@ export function ThemedView(props: ViewProps) {
 
   return <View style={[{ backgroundColor }, style]} {...otherProps} />;
 }
+
+export { View };

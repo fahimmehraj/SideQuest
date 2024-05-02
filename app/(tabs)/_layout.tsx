@@ -3,6 +3,7 @@ import { Pressable, useColorScheme } from "react-native";
 
 import Colors from "../../constants/Colors";
 import { FontAwesome, FontAwesome5, Ionicons } from "@expo/vector-icons";
+import React from "react";
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();

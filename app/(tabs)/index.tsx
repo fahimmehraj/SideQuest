@@ -5,6 +5,7 @@ import GradientText from "../../components/GradientText";
 import VisualQuestCard from "../../components/VisualQuestCard";
 import Colors from "../../constants/Colors";
 import BasicQuestCard from "../../components/BasicQuestCard";
+import React from "react";
 
 const sample_data = [
   {

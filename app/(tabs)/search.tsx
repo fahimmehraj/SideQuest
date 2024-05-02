@@ -2,6 +2,7 @@ import { StyleSheet, View } from 'react-native';
 
 import EditScreenInfo from '../../components/EditScreenInfo';
 import { Text, SafeAreaView } from '../../components/Themed';
+import React from 'react';
 
 export default function SearchScreen() {
   return (
