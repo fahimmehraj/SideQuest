@@ -9,9 +9,10 @@ type Props = {
   location: string;
 };
 
+
 const BasicQuestCard: React.FC<Props> = ({ title, price, distance, location }) => {
   const theme = useColorScheme() ?? "light";
-  const backgroundColor = theme == "dark" ? "rgba(255, 255, 255, 0.05)" : "rgba(0, 0, 0, 0.05)";
+  const backgroundColor = theme == "light" ? "rgba(0, 0, 0, 0.08)": "rgba(255, 255, 255, 0.1)";
 
   return (
       <TouchableOpacity style={[styles.card, { backgroundColor }]}>

@@ -3,9 +3,9 @@
  * https://docs.expo.io/guides/color-schemes/
  */
 
-import { Text as DefaultText, useColorScheme, View as DefaultView, SafeAreaView as DefaultSafeAreaView, View } from 'react-native';
+import { Text as DefaultText, useColorScheme, View as DefaultView, SafeAreaView as DefaultSafeAreaView, TextStyle, ViewStyle } from 'react-native';
 
-import Colors from '../constants/Colors';
+import Colors, { primaryColor } from '../constants/Colors';
 import React from 'react';
 
 export function useThemeColor(
@@ -48,7 +48,27 @@ export function ThemedView(props: ViewProps) {
   const { style, lightColor, darkColor, ...otherProps } = props;
   const backgroundColor = useThemeColor({ light: lightColor, dark: darkColor }, 'background');
 
-  return <View style={[{ backgroundColor }, style]} {...otherProps} />;
+  return <DefaultView style={[style, { backgroundColor }]} {...otherProps} />;
 }
 
-export { View };
+export function Title(props: TextProps) {
+  const { style, ...otherProps } = props;
+  const titleStyle: TextStyle = {
+    marginTop: 16,
+    marginBottom: -16,
+    fontSize: 58,
+    fontFamily: "ProximaNova-Black",
+  };
+  const underlineStyle: ViewStyle = {
+    borderColor: primaryColor,
+    borderBottomWidth: 6,
+    alignSelf: "flex-start",
+    marginBottom: 30,
+  }
+
+  return <ThemedView style={underlineStyle}>
+    <Text style={[titleStyle, style]} {...otherProps}/>
+    </ThemedView>
+}
+
+export { ThemedView as View };

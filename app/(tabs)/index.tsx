@@ -1,11 +1,10 @@
 import { FlatList, ScrollView, StyleSheet, TouchableOpacity, View } from "react-native";
 
-import { SafeAreaView, Text } from "../../components/Themed";
-import GradientText from "../../components/GradientText";
+import { SafeAreaView, Text, Title } from "../../components/Themed";
 import VisualQuestCard from "../../components/VisualQuestCard";
-import Colors from "../../constants/Colors";
 import BasicQuestCard from "../../components/BasicQuestCard";
 import React from "react";
+import Colors, { primaryColor } from "../../constants/Colors";
 
 const sample_data = [
   {
@@ -47,7 +46,7 @@ export default function TabOneScreen() {
       <FlatList
         ListHeaderComponent={
           <>
-            <Text style={styles.title}>Quests</Text>
+            <Title>Quests</Title>
             <View style={{ marginTop: 20 }}>
               <Text style={styles.subheading}>For you</Text>
               <FlatList
@@ -76,13 +75,6 @@ const styles = StyleSheet.create({
   main_container: {
     padding: 25,
   },
-  title: {
-    marginTop: 16,
-    fontSize: 58,
-    fontWeight: "bold",
-    fontFamily: "ProximaNova-Black",
-    color: "#e0e0e0",
-  },
   separator: {
     marginBottom: 30,
     height: 1,
@@ -97,6 +89,6 @@ const styles = StyleSheet.create({
   },
   link: {
     fontSize: 18,
-    color: "#149cf4",
+    color: primaryColor,
   },
 });

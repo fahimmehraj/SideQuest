@@ -33,6 +33,13 @@ export default function TabLayout() {
           tabBarIcon: ({ color }) => <Ionicons name="search" size={28} color={color} />,
         }}
       />
+      <Tabs.Screen
+        name="account"
+        options={{
+          title: "Account",
+          tabBarIcon: ({ color }) => <Ionicons name="person-circle" size={28} color={color} />,
+        }}
+      />
     </Tabs>
   );
 }
