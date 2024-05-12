@@ -8,7 +8,7 @@ const Elevated: React.FC<PropsWithChildren<ViewProps>> = ({ children, ...props }
   const theme = useColorScheme() ?? "light";
   const backgroundColor = theme == "light" ? "rgba(0, 0, 0, 0.08)" : "rgba(255, 255, 255, 0.1)";
 
-  return <DefaultView style={[style, { backgroundColor }]} {...otherProps}>{children}</DefaultView>;
+  return <DefaultView style={[{ backgroundColor }, style]} {...otherProps}>{children}</DefaultView>;
 };
 
 export default Elevated;

@@ -12,15 +12,14 @@ export default function TabLayout() {
     <Tabs
       screenOptions={{
         tabBarActiveTintColor: Colors["light"].tint,
-        headerTransparent: true,
+        headerShown: false,
         tabBarShowLabel: false,
-        tabBarStyle: { backgroundColor: Colors[colorScheme ?? "light"].background, borderTopWidth: 0 },
-        headerTitle: "",
+        tabBarStyle: { backgroundColor: Colors[colorScheme ?? "light"].background },
       }}>
       <Tabs.Screen
-        name="index"
+        name="home"
         options={{
-          title: "Explore",
+          title: "Home",
           tabBarIcon: ({ color }) => (
             <FontAwesome5 name="compass" size={28} color={color} style={{ marginBottom: -3 }} />
           ),
@@ -38,6 +37,13 @@ export default function TabLayout() {
         options={{
           title: "Account",
           tabBarIcon: ({ color }) => <Ionicons name="person-circle" size={28} color={color} />,
+        }}
+      />
+      <Tabs.Screen
+        name="store"
+        options={{
+          title: "Store",
+          tabBarIcon: ({ color }) => <Ionicons name="cart" size={28} color={color} />,
         }}
       />
     </Tabs>

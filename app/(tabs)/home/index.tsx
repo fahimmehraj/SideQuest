@@ -1,20 +1,20 @@
 import { FlatList, ScrollView, StyleSheet, TouchableOpacity, View } from "react-native";
 
-import { SafeAreaView, Text, Title } from "../../components/Themed";
-import VisualQuestCard from "../../components/VisualQuestCard";
-import BasicQuestCard from "../../components/BasicQuestCard";
+import { SafeAreaView, Text, Title } from "../../../components/Themed";
+import VisualQuestCard from "../../../components/VisualQuestCard";
+import BasicQuestCard from "../../../components/BasicQuestCard";
 import React from "react";
-import Colors, { primaryColor } from "../../constants/Colors";
+import Colors, { primaryColor } from "../../../constants/Colors";
 
 const sample_data = [
   {
     title: "Mow Lawn to Checkerboard Pattern",
-    thumbnailUrl: require("../../assets/images/mowing-lawn.jpg"),
+    thumbnailUrl: require("../../../assets/images/mowing-lawn.jpg"),
     price: "$24.99",
   },
   {
     title: "Walk my Beautiful Dogs",
-    thumbnailUrl: require("../../assets/images/dog-leash.webp"),
+    thumbnailUrl: require("../../../assets/images/dog-leash.webp"),
     price: "$44.99",
   },
 ];

@@ -1,6 +1,7 @@
 import React from "react";
-import { StyleSheet, TouchableOpacity, View, useColorScheme } from "react-native";
+import { Pressable, StyleSheet, TouchableOpacity, View, useColorScheme } from "react-native";
 import { Text } from "./Themed";
+import { Link, router } from "expo-router";
 
 type Props = {
   title: string;
@@ -15,14 +16,18 @@ const BasicQuestCard: React.FC<Props> = ({ title, price, distance, location }) =
   const backgroundColor = theme == "light" ? "rgba(0, 0, 0, 0.08)": "rgba(255, 255, 255, 0.1)";
 
   return (
-      <TouchableOpacity style={[styles.card, { backgroundColor }]}>
+      <Link asChild href="home/gigs/1">
+        <TouchableOpacity>
+        <View style={[styles.card, { backgroundColor }]}>
         <Text style={styles.title}>{title}</Text>
         <View>
           <Text>{distance} miles away</Text>
           <Text>{location}</Text>
         </View>
         <Text>{price}</Text>
-      </TouchableOpacity>
+        </View>
+        </TouchableOpacity>
+      </Link>
   );
 };
 

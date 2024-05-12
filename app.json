@@ -29,7 +29,12 @@
       "favicon": "./assets/images/favicon.png"
     },
     "plugins": [
-      "expo-font"
+      [
+      "expo-font",
+      {
+        "fonts": ["./assets/fonts/ProximaNova-Black.otf", "./assets/fonts/ProximaNova-Regular.otf"]
+      }],
+      "expo-router"
     ]
   }
 }

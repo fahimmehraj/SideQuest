@@ -8,22 +8,16 @@ import Elevated from "../../components/Elevated";
 
 const sample_data_2 = [
   {
-    title: "Deliver Small Package",
-    price: "$9.99",
+    title: "TA for Intro to CS at CCNY",
+    price: "$21.99",
     distance: 0.1,
-    location: "Queens, NY",
+    location: "Brooklyn, NY",
   },
   {
-    title: "Play with special needs child",
+    title: "Walk some dogs",
     price: "$14.99",
     distance: 0.3,
     location: "Queens, NY",
-  },
-  {
-    title: "Teach my son fractions",
-    price: "$19.99",
-    distance: 1.3,
-    location: "Bronx, NY",
   },
 ];
 
@@ -53,7 +47,7 @@ export default function AccountScreen() {
           <Text style={{ fontSize: 28 }}>Lvl 3</Text>
           <Text style={{ fontSize: 20 }}>280/400</Text>
         </View>
-        <Text style={styles.subheading}>Recent Gigs</Text>
+        <Text style={styles.subheading}>Recent Quests</Text>
         <FlatList
           data={sample_data_2}
           renderItem={(gig) => <BasicQuestCard {...gig.item} />}
