@@ -17,7 +17,7 @@ export default function TabLayout() {
         tabBarStyle: { backgroundColor: Colors[colorScheme ?? "light"].background },
       }}>
       <Tabs.Screen
-        name="home"
+        name="(home)"
         options={{
           title: "Home",
           tabBarIcon: ({ color }) => (
@@ -33,7 +33,7 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="account"
+        name="(account)"
         options={{
           title: "Account",
           tabBarIcon: ({ color }) => <Ionicons name="person-circle" size={28} color={color} />,

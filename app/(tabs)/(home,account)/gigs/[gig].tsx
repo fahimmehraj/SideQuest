@@ -1,9 +1,9 @@
 import React from "react";
 import { StyleSheet, TouchableOpacity, useColorScheme, Image, ScrollView } from "react-native";
-import { SafeAreaView, Title, Text, View } from "../../../../../components/Themed";
+import { SafeAreaView, Title, Text, View } from "../../../../components/Themed";
 import { Ionicons } from "@expo/vector-icons";
-import Elevated from "../../../../../components/Elevated";
-import { primaryColor } from "../../../../../constants/Colors";
+import Elevated from "../../../../components/Elevated";
+import { primaryColor } from "../../../../constants/Colors";
 import { router } from "expo-router";
 
 export default function QuestScreen() {
@@ -18,7 +18,7 @@ export default function QuestScreen() {
         <Text style={styles.subheading}>Small Package Delivery</Text>
         <Image
           style={styles.image}
-          source={require("../../../../../assets/images/mowing-lawn.jpg")}
+          source={require("../../../../assets/images/mowing-lawn.jpg")}
           resizeMode="cover"
           resizeMethod="scale"
         />

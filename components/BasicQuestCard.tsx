@@ -1,7 +1,7 @@
 import React from "react";
 import { Pressable, StyleSheet, TouchableOpacity, View, useColorScheme } from "react-native";
 import { Text } from "./Themed";
-import { Link, router } from "expo-router";
+import { Link, router, usePathname, useRouter, useSegments } from "expo-router";
 
 type Props = {
   title: string;
@@ -14,9 +14,11 @@ type Props = {
 const BasicQuestCard: React.FC<Props> = ({ title, price, distance, location }) => {
   const theme = useColorScheme() ?? "light";
   const backgroundColor = theme == "light" ? "rgba(0, 0, 0, 0.08)": "rgba(255, 255, 255, 0.1)";
+  const [, second ] = useSegments();
+  console.log(second)
 
   return (
-      <Link asChild href="home/gigs/1">
+      <Link asChild href={`/${second}/gigs/1`}>
         <TouchableOpacity>
         <View style={[styles.card, { backgroundColor }]}>
         <Text style={styles.title}>{title}</Text>

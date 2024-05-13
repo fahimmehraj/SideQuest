@@ -1,10 +1,12 @@
 import React from "react";
 import { StyleSheet, TouchableOpacity, useColorScheme } from "react-native";
-import { SafeAreaView, Title } from "../../components/Themed";
+import { SafeAreaView, Title, View } from "../../components/Themed";
 
 export default function StorePage() {
-  return <SafeAreaView style={styles.container}>
+  return <SafeAreaView style={{ flex: 1 }}>
+    <View style={styles.container}>
     <Title>Store</Title>
+    </View>
   </SafeAreaView>;
 }
 

@@ -49,7 +49,7 @@ function RootLayoutNav() {
           <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         </Stack>
       </ThemeProvider>
-      <Redirect href="/home" />
+      <Redirect href="/(home)" />
     </>
   );
 }

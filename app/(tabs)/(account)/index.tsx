@@ -1,10 +1,11 @@
+
 import React from "react";
 import { FlatList, Pressable, ScrollView, StyleSheet, TouchableOpacity, View } from "react-native";
-import { Text, SafeAreaView, Title } from "../../components/Themed";
-import EditScreenInfo from "../../components/EditScreenInfo";
-import EXPBar from "../../components/EXPBar";
-import BasicQuestCard from "../../components/BasicQuestCard";
-import Elevated from "../../components/Elevated";
+import { Text, SafeAreaView, Title } from "../../../components/Themed";
+import EditScreenInfo from "../../../components/EditScreenInfo";
+import EXPBar from "../../../components/EXPBar";
+import BasicQuestCard from "../../../components/BasicQuestCard";
+import Elevated from "../../../components/Elevated";
 
 const sample_data_2 = [
   {
@@ -23,7 +24,8 @@ const sample_data_2 = [
 
 export default function AccountScreen() {
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={{ flex: 1 }}>
+      <View style={styles.container}>
       <ScrollView>
         <Title>Account</Title>
         <View style={styles.balanceContainer}>
@@ -50,17 +52,18 @@ export default function AccountScreen() {
         <Text style={styles.subheading}>Recent Quests</Text>
         <FlatList
           data={sample_data_2}
+          scrollEnabled={false}
           renderItem={(gig) => <BasicQuestCard {...gig.item} />}
           contentContainerStyle={{}}
         />
       </ScrollView>
+      </View>
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     padding: 25,
   },
   balanceContainer: {
