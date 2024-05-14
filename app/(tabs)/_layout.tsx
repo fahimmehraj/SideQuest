@@ -21,7 +21,7 @@ export default function TabLayout() {
         options={{
           title: "Home",
           tabBarIcon: ({ color }) => (
-            <FontAwesome5 name="compass" size={28} color={color} style={{ marginBottom: -3 }} />
+            <Ionicons name="home" size={28} color={color} />
           ),
         }}
       />

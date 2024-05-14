@@ -1,28 +1,26 @@
-import React from 'react';
-import FontAwesome from '@expo/vector-icons/FontAwesome';
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
-import { useFonts } from 'expo-font';
-import { useEffect } from 'react';
-import { useColorScheme } from 'react-native';
-import { Redirect, Stack } from 'expo-router';
-import 'react-native-reanimated'
+import React from "react";
+import FontAwesome from "@expo/vector-icons/FontAwesome";
+import { DarkTheme, DefaultTheme, ThemeProvider } from "@react-navigation/native";
+import { useFonts } from "expo-font";
+import { useEffect } from "react";
+import { useColorScheme } from "react-native";
+import { Redirect, Stack } from "expo-router";
+import "react-native-reanimated";
 
 export {
   // Catch any errors thrown by the Layout component.
   ErrorBoundary,
-} from 'expo-router';
+} from "expo-router";
 
 export const unstable_settings = {
-  // Ensure that reloading on `/modal` keeps a back button present.
-  initialRouteName: '(tabs)',
+  initialRouteName: "(onboard)",
 };
-
 
 export default function RootLayout() {
   const [loaded, error] = useFonts({
-    SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
-    'ProximaNova-Regular': require('../assets/fonts/ProximaNova-Regular.otf'),
-    'ProximaNova-Black': require('../assets/fonts/ProximaNova-Black.otf'),
+    SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
+    "ProximaNova-Regular": require("../assets/fonts/ProximaNova-Regular.otf"),
+    "ProximaNova-Black": require("../assets/fonts/ProximaNova-Black.otf"),
     ...FontAwesome.font,
   });
 
@@ -41,15 +39,17 @@ export default function RootLayout() {
 
 function RootLayoutNav() {
   const colorScheme = useColorScheme();
+  const loggedIn = false;
 
   return (
     <>
-      <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+      <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
         <Stack>
+          <Stack.Screen name="(onboard)" options={{ headerShown: false }} />
           <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         </Stack>
       </ThemeProvider>
-      <Redirect href="/(home)" />
+      {!loggedIn ? <Redirect href="/(onboard)" /> : <Redirect href="/(home)" />}
     </>
   );
 }
