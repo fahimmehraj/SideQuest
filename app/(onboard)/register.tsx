@@ -55,26 +55,22 @@ export default function Register() {
             <Text style={{ fontSize: 16 }}>First Name</Text>
             <TextInput
               style={[styles.input, styles.rowInput]}
-              secureTextEntry={true}
               placeholder="First Name"
               value={firstName}
               onChangeText={(e) => setFirstName(e)}
               keyboardType="default"
               placeholderTextColor="#bfbfbf"
-              textContentType="password"
             />
           </View>
           <View>
             <Text style={{ fontSize: 16 }}>Last Name</Text>
             <TextInput
               style={[styles.input, styles.rowInput]}
-              secureTextEntry={true}
               placeholder="Last Name"
               value={lastName}
               onChangeText={(e) => setLastName(e)}
               keyboardType="default"
               placeholderTextColor="#bfbfbf"
-              textContentType="password"
             />
           </View>
         </View>

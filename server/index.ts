@@ -1,14 +1,26 @@
 import 'dotenv/config'
 import express, { Application, Request, Response } from 'express'
+import * as trpcExpress from '@trpc/server/adapters/express';
 import webhook from './webhook';
+import { realAppRouter } from './router';
 
 const app = express()
 
 const port = process.env.PORT || 3000;
 
-app.get('/toto', (req, res) => {
-    res.send('Hello toto')
-});
+const createContext = ({
+    req,
+    res,
+  }: trpcExpress.CreateExpressContextOptions) => ({}); // no context
+  type Context = Awaited<ReturnType<typeof createContext>>;
+
+app.use(
+    '/trpc',
+    trpcExpress.createExpressMiddleware({
+      router: realAppRouter,
+      createContext,
+    }),
+  );
 
 app.use('/api', webhook)
 

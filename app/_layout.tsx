@@ -1,13 +1,12 @@
 import React from "react";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
-import { DarkTheme, DefaultTheme, ThemeProvider } from "@react-navigation/native";
 import { useFonts } from "expo-font";
 import { useEffect } from "react";
-import { useColorScheme, Text } from "react-native";
-import { Redirect, Stack } from "expo-router";
+import { Text } from "react-native";
 import "react-native-reanimated";
 import { ClerkProvider } from "@clerk/clerk-expo";
 import RootComponent from "../components/RootComponent";
+import * as SecureStore from "expo-secure-store";
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -16,6 +15,23 @@ export {
 
 export const unstable_settings = {
   initialRouteName: "(onboard)",
+};
+
+const tokenCache = {
+  async getToken(key: string) {
+    try {
+      return SecureStore.getItemAsync(key);
+    } catch (err) {
+      return null;
+    }
+  },
+  async saveToken(key: string, value: string) {
+    try {
+      return SecureStore.setItemAsync(key, value);
+    } catch (err) {
+      return;
+    }
+  },
 };
 
 export default function RootLayout() {
@@ -44,10 +60,11 @@ function RootLayoutNav() {
   if (!clerk_key) {
     return <Text style={{ color: "red" }}>No clerk key for auth</Text>;
   }
+  
 
   return (
     <>
-      <ClerkProvider publishableKey={clerk_key}>
+      <ClerkProvider publishableKey={clerk_key} tokenCache={tokenCache}>
         <RootComponent />
       </ClerkProvider>
     </>

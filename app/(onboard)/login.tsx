@@ -5,8 +5,32 @@ import { Ionicons } from "@expo/vector-icons";
 import Elevated from "../../components/Elevated";
 import { router } from "expo-router";
 import { primaryColor } from "../../constants/Colors";
+import { useSignIn } from "@clerk/clerk-expo";
 
 export default function Login() {
+  const { signIn, setActive, isLoaded } = useSignIn();
+  const [emailAddress, setEmailAddress] = React.useState("");
+  const [password, setPassword] = React.useState("");
+
+  const onSignInPress = async () => {
+    if (!isLoaded) {
+      return;
+    }
+    console.log(emailAddress, password)
+
+    try {
+      const completeSignIn = await signIn.create({
+        identifier: emailAddress,
+        password,
+      });
+      console.log("session id:", completeSignIn.createdSessionId)
+      // This is an important step,
+      // This indicates the user is signed in
+      await setActive({ session: completeSignIn.createdSessionId });
+    } catch (err: any) {
+      console.error(JSON.stringify(err, null, 2));
+    }
+  };
   return (
     <View style={{ marginTop: -256 }}>
       <View style={styles.head}>
@@ -20,6 +44,8 @@ export default function Login() {
         <TextInput
           style={styles.input}
           placeholder="example@gmail.com"
+          value={emailAddress}
+          onChangeText={(e) => setEmailAddress(e)}
           keyboardType="email-address"
           placeholderTextColor="#fff"
         />
@@ -28,6 +54,8 @@ export default function Login() {
           style={styles.input}
           secureTextEntry={true}
           placeholder="Choose a secure password"
+          value={password}
+          onChangeText={(e) => setPassword(e)}
           keyboardType="default"
           placeholderTextColor="#fff"
           textContentType="password"
@@ -36,7 +64,7 @@ export default function Login() {
           <TouchableOpacity onPress={() => router.navigate("/register")}>
           <Text style={{ fontSize: 15, color: primaryColor }}>Don't have an account?</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.btn} onPress={() => router.navigate("/(tabs)")}>
+          <TouchableOpacity style={styles.btn} onPress={onSignInPress}>
             <Text style={{ fontSize: 18, textAlign: "center" }}>Login</Text>
           </TouchableOpacity>
         </View>

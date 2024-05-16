@@ -1,10 +1,11 @@
-import { FlatList, ScrollView, StyleSheet, TouchableOpacity, View } from "react-native";
+import { ActivityIndicator, FlatList, ScrollView, StyleSheet, TouchableOpacity, View } from "react-native";
 
 import { SafeAreaView, Text, Title } from "../../../components/Themed";
 import VisualQuestCard from "../../../components/VisualQuestCard";
 import BasicQuestCard from "../../../components/BasicQuestCard";
 import React from "react";
 import Colors, { primaryColor } from "../../../constants/Colors";
+import { trpc } from "../../../utils/trpc";
 
 const sample_data = [
   {
@@ -41,6 +42,14 @@ const sample_data_2 = [
 ];
 
 export default function TabOneScreen() {
+  const questListQuery = trpc.questList.useQuery();
+
+  if (questListQuery.status != "success") {
+    return <ActivityIndicator size="large" color={primaryColor} />;
+  }
+
+  const questList = questListQuery.data;
+
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <FlatList
@@ -63,8 +72,16 @@ export default function TabOneScreen() {
             </View>
           </>
         }
-        data={sample_data_2}
-        renderItem={(gig) => <BasicQuestCard {...gig.item} />}
+        data={questList}
+        renderItem={(quest) => (
+          <BasicQuestCard
+            id={quest.item.id}
+            distance={0.1}
+            location={quest.item.location}
+            price={`\$${quest.item.pay}`}
+            title={quest.item.name}
+          />
+        )}
         contentContainerStyle={styles.main_container}
       />
     </SafeAreaView>
