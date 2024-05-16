@@ -2,6 +2,8 @@ import { Webhook } from "svix";
 import bodyParser from "body-parser";
 import { WebhookEvent } from "@clerk/clerk-sdk-node";
 import { Router } from "express";
+import db from "./db/drizzle";
+import { user } from "./db/schema";
 
 const router = Router();
 
@@ -59,6 +61,18 @@ router.post(
     const eventType = evt.type;
     console.log(`Webhook with an ID of ${id} and type of ${eventType}`);
     console.log("Webhook body:", evt.data);
+
+    if (eventType == "user.created") {
+      const { universityName } = evt.data.unsafe_metadata;
+      const emailAddress = evt.data.email_addresses[0].email_address;
+      await db.insert(user).values({
+        id: id!,
+        email: emailAddress,
+        firstName: evt.data.first_name!,
+        lastName: evt.data.last_name!,
+        universityName: universityName as string,
+      });
+    }
 
     return res.status(200).json({
       success: true,

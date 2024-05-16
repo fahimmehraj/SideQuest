@@ -3,9 +3,11 @@ import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { DarkTheme, DefaultTheme, ThemeProvider } from "@react-navigation/native";
 import { useFonts } from "expo-font";
 import { useEffect } from "react";
-import { useColorScheme } from "react-native";
+import { useColorScheme, Text } from "react-native";
 import { Redirect, Stack } from "expo-router";
 import "react-native-reanimated";
+import { ClerkProvider } from "@clerk/clerk-expo";
+import RootComponent from "../components/RootComponent";
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -38,18 +40,16 @@ export default function RootLayout() {
 }
 
 function RootLayoutNav() {
-  const colorScheme = useColorScheme();
-  const loggedIn = false;
+  const clerk_key = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY;
+  if (!clerk_key) {
+    return <Text style={{ color: "red" }}>No clerk key for auth</Text>;
+  }
 
   return (
     <>
-      <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
-        <Stack>
-          <Stack.Screen name="(onboard)" options={{ headerShown: false }} />
-          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        </Stack>
-      </ThemeProvider>
-      {!loggedIn ? <Redirect href="/(onboard)" /> : <Redirect href="/(home)" />}
+      <ClerkProvider publishableKey={clerk_key}>
+        <RootComponent />
+      </ClerkProvider>
     </>
   );
 }

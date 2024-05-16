@@ -4,13 +4,42 @@ import { StyleSheet, TextInput, TouchableOpacity, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { router } from "expo-router";
 import { primaryColor } from "../../constants/Colors";
+import { useSignUp } from "@clerk/clerk-expo";
 
 export default function Register() {
+  const { isLoaded, signUp, setActive } = useSignUp();
+
   const [firstName, setFirstName] = React.useState("");
   const [lastName, setLastName] = React.useState("");
   const [universityName, setUniversityName] = React.useState("");
   const [emailAddress, setEmailAddress] = React.useState("");
   const [password, setPassword] = React.useState("");
+
+  const onSignUpPress = async () => {
+    if (!isLoaded) {
+      return;
+    }
+
+    try {
+      const test = await signUp.create({
+        firstName,
+        lastName,
+        emailAddress,
+        password,
+        unsafeMetadata: {
+          universityName
+        }
+      });
+
+      console.log("created user, ", test.createdSessionId);
+      await setActive({ session: test.createdSessionId })
+
+
+    } catch (err: any) {
+      console.error(JSON.stringify(err, null, 2));
+    }
+  };
+
 
   return (
     <View style={{ marginTop: -256 }}>
@@ -82,7 +111,7 @@ export default function Register() {
           <TouchableOpacity onPress={() => router.navigate("/login")}>
             <Text style={{ fontSize: 15, color: primaryColor }}>Have an account?</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.btn} onPress={() => router.replace("/(tabs)")}>
+          <TouchableOpacity style={styles.btn} onPress={onSignUpPress}>
             <Text style={{ fontSize: 18, textAlign: "center" }}>Register</Text>
           </TouchableOpacity>
         </View>
